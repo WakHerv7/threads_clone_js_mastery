@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import * as z from 'zod';
 import { Textarea } from "../ui/textarea";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
 import { updateUser } from "@/lib/actions/users.actions";

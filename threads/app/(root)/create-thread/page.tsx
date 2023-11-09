@@ -4,11 +4,13 @@ import { redirect } from "next/navigation";
 
 async function Page() {
   const user = await currentUser();
+  
   if (!user) {
-    redirect("/sign-in");
+    return null;
   }
 
-  const userInfo = fetchUser(user.id);
+  const userInfo = await fetchUser(user.id);
+  
   if (!userInfo?.onboarded) {
     redirect("/onboarding");
   }
