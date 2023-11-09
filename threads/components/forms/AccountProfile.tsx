@@ -11,6 +11,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import * as z from 'zod';
@@ -19,7 +20,7 @@ import Image from "next/image";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
-import { updateUser } from "@/lib/actions/users.actions";
+import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
@@ -162,6 +163,7 @@ export default function AccountProfile({user, btnTitle} : Props){
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -181,6 +183,7 @@ export default function AccountProfile({user, btnTitle} : Props){
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -199,10 +202,11 @@ export default function AccountProfile({user, btnTitle} : Props){
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit"  className="btn-primary-500">
+        <Button type="submit"  className="bg-primary-500">
           Submit
         </Button>
       </form>
