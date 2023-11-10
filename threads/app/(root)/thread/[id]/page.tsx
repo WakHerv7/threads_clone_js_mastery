@@ -5,7 +5,7 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-export default async function Page({ params } : { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
   const threadId = params.id;
   const user = await currentUser();
 
