@@ -137,3 +137,27 @@ export async function addCommentToThread(
      throw new Error(`Failed to add comment to thread ${error.message}`);
    }
 }
+
+export async function getActivity(userId: string) {
+  try {
+    connectToDB();
+
+    // get all threads created by the user
+    const userThreads = await Thread.find({ author: userId });
+
+    // get all comments on users threads
+    const childThreads = await userThreads.reduce((acc, userThread) => {
+      return acc.concat(userThread.children);
+    }, []);
+
+    // get comments from users threads except the ones created by the user
+    const replies = await Thread.find({
+      _id: { $in: childThreads },
+      author: { $ne: userId }
+    });
+
+    return replies;
+  } catch (error: any) {
+    throw new Error(`Failed to get activity ${error.message}`);
+  }
+}
