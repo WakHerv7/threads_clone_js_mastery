@@ -9,7 +9,6 @@ id: string;
 name: string;
 username: string;
 imgUrl: string;
-personType: string;
 }
 
 function UserCard({
@@ -17,7 +16,6 @@ function UserCard({
   name,
   username,
   imgUrl,
-  personType,
 }: Props) {
   const router = useRouter();
 
