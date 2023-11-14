@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { formatDateString } from "@/lib/utils";
 
 interface Props {
   id: string;
@@ -35,8 +36,9 @@ export default function ThreadCard({
   createdAt,
   community,
   author,
-  isComment = false 
+  isComment = false
 }: Props) {
+
   return (
     <article className={`flex flex-col w-full rounded-xl ${ isComment ? `px-0 xs:px-7` : `bg-dark-2 p-7 ` }`}>
       <div className="flex items-start justify-between">
@@ -97,8 +99,8 @@ export default function ThreadCard({
                 />
 
                 {isComment && comments.length > 0 && (
-                  <Link href={`/thread/&{id}`}>
-                  <p>{comments.length} replies</p>
+                  <Link href={`/thread/${id}`}>
+                  <p className="mt-2 ml-6 text-subtle-medium text-gray-1">{comments.length} replies</p>
                   </Link>
                 )}
               </div>
@@ -106,6 +108,27 @@ export default function ThreadCard({
           </div>
         </div>
       </div>
+      {!isComment && comments.length > 0 && (
+        <p className="mt-2 ml-5 text-subtle-medium text-gray-1">
+          {comments.length} {comments.length > 1 ? "replies" : "reply"}
+        </p>
+      )}
+      {!isComment && community && (
+        <Link href={`/communities/${community.id}`} className="mt-5 flex items-center">
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt.toString())}
+            {" "} - {community.name} Community
+          </p>
+
+          <Image
+            src={community.image}
+            alt={community.name}
+            width={14}
+            height={14}
+            className="ml-1 rounded-full object-contain"
+          />
+        </Link>
+      )}
     </article>
   )
 }

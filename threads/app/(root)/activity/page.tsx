@@ -1,5 +1,4 @@
-import { getActivity } from "@/lib/actions/thread.actions";
-import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchUser, getActivity } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs"
 import Image from "next/image";
 import Link from "next/link";

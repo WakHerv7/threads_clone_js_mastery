@@ -65,8 +65,8 @@ const Comment = ({
               <Image
                 src={currentUserImg}
                 alt="user image"
-                width={48}
-                height={48}
+                width={36}
+                height={36}
                 className="rounded-full object-cover"
               />
             </FormLabel>

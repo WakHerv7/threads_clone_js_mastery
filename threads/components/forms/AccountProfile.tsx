@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import * as z from 'zod';
 import { Textarea } from "../ui/textarea";
 import Image from "next/image";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
 import { updateUser } from "@/lib/actions/user.actions";
@@ -206,7 +206,7 @@ export default function AccountProfile({user, btnTitle} : Props){
             </FormItem>
           )}
         />
-        <Button type="submit"  className="bg-primary-500">
+        <Button type="submit"  className="bg-primary-500" title={btnTitle}>
           Submit
         </Button>
       </form>
