@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { formatDateString } from "@/lib/utils";
+import DeleteThreadBtn from "../shared/DeleteThreadBtn";
 
 interface Props {
   id: string;
@@ -25,7 +26,6 @@ interface Props {
   }[]
   isComment?: boolean;
 }
-
 
 export default function ThreadCard({
   id,
@@ -58,9 +58,12 @@ export default function ThreadCard({
           </div>
 
           <div className="flex flex-col w-full">
-            <Link href={`/profile/${author.id}`} className="w-fit">
-              <h4 className="cursor-pointer text-base-semibold text-light-1">{author.name}</h4>
-            </Link>
+            <div className="w-fit flex flex-row justify-between">
+              <Link href={`/profile/${author.id}`} className="flex-3">
+                <h4 className="cursor-pointer text-base-semibold text-light-1">{author.name}</h4>
+              </Link>
+              <DeleteThreadBtn id={id} />
+            </div>
 
             <p className="mt-2 text-small-regular text-light-2">
               {content}

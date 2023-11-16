@@ -51,29 +51,30 @@ async function Page({ params }: {params: {id: string}}) {
             })}
           </TabsList>
           <TabsContent value="threads" className="w-full text-light-1">
-              <ThreadsTab
-                currentUserId={user.id}
-                accountId={communityDetails.id}
-                accountType="Community"
-              /> 
-            </TabsContent>
-            <TabsContent value="members" className="w-full text-light-1">
-              {communityDetails.members.map((member: any) => {
-                <UserCard
-                  id={member.id}
-                  username={member.username}
-                  name={member.name}
-                  imgUrl={member.image}
-                />
-              })}
-            </TabsContent>
-            <TabsContent value="requests" className="w-full text-light-1">
-              <ThreadsTab
-                currentUserId={user.id}
-                accountId={communityDetails.id}
-                accountType="Community"
-              /> 
-            </TabsContent>
+            <ThreadsTab
+              currentUserId={user.id}
+              accountId={communityDetails.id}
+              accountType="Community"
+            /> 
+          </TabsContent>
+          <TabsContent value="members" className="w-full text-light-1">
+            {communityDetails.members.map((member: any) => {
+              <UserCard
+                id={member.id}
+                username={member.username}
+                name={member.name}
+                imgUrl={member.image}
+                personType="User"
+              />
+            })}
+          </TabsContent>
+          <TabsContent value="requests" className="w-full text-light-1">
+            <ThreadsTab
+              currentUserId={user.id}
+              accountId={communityDetails.id}
+              accountType="Community"
+            /> 
+          </TabsContent>
         </Tabs>
       </div>
     </section>
