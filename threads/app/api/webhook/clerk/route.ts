@@ -59,9 +59,9 @@ export const POST = async (request: Request) => {
 
     try {
       // @ts-ignore
-      console.log("created", evnt?.data);
+      await createCommunity(id, name, slug, image_url, created_by);
 
-      return NextResponse.json({ message: evnt.data }, { status: 201 });
+      return NextResponse.json({ message: "Organization created" }, { status: 201 });
     } catch (err) {
       console.log(err);
       return NextResponse.json(
