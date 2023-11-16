@@ -26,10 +26,17 @@ export const POST = async (request: Request) => {
     "svix-timestamp": header.get("svix-timestamp"),
     "svix-signature": header.get("svix-signature"),
   };
+  
+  if (!heads["svix-id"] || !heads["svix-timestamp"] || !heads["svix-signature"]) {
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
+  }
 
   // Activitate Webhook in the Clerk Dashboard.
   // After adding the endpoint, you'll see the secret on the right side.
   const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
+  if (!wh) {
+    return NextResponse.json({ message: "Invalid request" }, { status: 400 });
+  }
 
   let evnt: WebhookEvent;
 
@@ -65,7 +72,7 @@ export const POST = async (request: Request) => {
     } catch (err) {
       console.log(err);
       return NextResponse.json(
-        { message: "Internal Server Error" },
+        { message: "Couldn't create the organization. Internal Server Error" },
         { status: 500 }
       );
     }
