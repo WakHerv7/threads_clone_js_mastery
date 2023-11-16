@@ -59,10 +59,10 @@ export default function ThreadCard({
 
           <div className="flex flex-col w-full">
             <div className="w-fit flex flex-row justify-between">
-              <Link href={`/profile/${author.id}`} className="flex-3">
+              <Link href={`/profile/${author.id}`} className="flex-4">
                 <h4 className="cursor-pointer text-base-semibold text-light-1">{author.name}</h4>
               </Link>
-              <DeleteThreadBtn id={id} />
+              <DeleteThreadBtn id={JSON.stringify(id)} />
             </div>
 
             <p className="mt-2 text-small-regular text-light-2">

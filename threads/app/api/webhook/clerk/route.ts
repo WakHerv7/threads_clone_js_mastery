@@ -6,9 +6,8 @@
 // It's a good practice to verify webhooks. Above article shows why we should do it
 import { Webhook, WebhookRequiredHeaders } from "svix";
 import { headers } from "next/headers";
-
+import { WebhookEvent } from "@clerk/nextjs/server";
 import { IncomingHttpHeaders } from "http";
-
 import { NextResponse } from "next/server";
 import {
   addMemberToCommunity,
@@ -17,22 +16,6 @@ import {
   removeUserFromCommunity,
   updateCommunityInfo,
 } from "@/lib/actions/community.actions";
-
-// Resource: https://clerk.com/docs/integration/webhooks#supported-events
-// Above document lists the supported events
-type EventType =
-  | "organization.created"
-  | "organizationInvitation.created"
-  | "organizationMembership.created"
-  | "organizationMembership.deleted"
-  | "organization.updated"
-  | "organization.deleted";
-
-type Event = {
-  data: Record<string, string | number | Record<string, string>[]>;
-  object: "event";
-  type: EventType;
-};
 
 export const POST = async (request: Request) => {
   const payload = await request.json();
@@ -48,25 +31,24 @@ export const POST = async (request: Request) => {
   // After adding the endpoint, you'll see the secret on the right side.
   const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
 
-  let evnt: Event | null = null;
+  let evnt: WebhookEvent;
 
   try {
     evnt = wh.verify(
       JSON.stringify(payload),
       heads as IncomingHttpHeaders & WebhookRequiredHeaders
-    ) as Event;
+    ) as WebhookEvent;
   } catch (err) {
     return NextResponse.json({ message: err }, { status: 400 });
   }
 
-  const eventType: EventType = evnt?.type!;
+  const eventType = evnt?.type;
 
   // Listen organization creation event
   if (eventType === "organization.created") {
     // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
     // Show what evnt?.data sends from above resource
-    const { id, name, slug, logo_url, image_url, created_by } =
-      evnt?.data ?? {};
+    const { id, name, image_url, created_by } = evnt.data;
 
     try {
       // @ts-ignore
@@ -74,8 +56,7 @@ export const POST = async (request: Request) => {
         // @ts-ignore
         id,
         name,
-        slug,
-        logo_url || image_url,
+        image_url,
         "org bio",
         created_by
       );
