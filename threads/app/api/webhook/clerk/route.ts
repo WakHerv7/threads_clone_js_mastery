@@ -61,7 +61,7 @@ export const POST = async (request: Request) => {
       // @ts-ignore
       console.log("created", evnt?.data);
 
-      return NextResponse.json({ message: "User created" }, { status: 201 });
+      return NextResponse.json({ message: evnt.data }, { status: 201 });
     } catch (err) {
       console.log(err);
       return NextResponse.json(
