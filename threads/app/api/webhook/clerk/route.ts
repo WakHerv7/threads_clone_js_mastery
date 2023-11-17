@@ -59,7 +59,7 @@ export const POST = async (request: Request) => {
 
     try {
       // @ts-ignore
-      await createCommunity(id, name, slug, image_url, "org bio", created_by);
+      await createCommunity(id, name, slug, "org bio", image_url, created_by);
 
       return NextResponse.json({ message: "Organization created" }, { status: 201 });
     } catch (err) {

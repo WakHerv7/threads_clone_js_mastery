@@ -128,7 +128,7 @@ export default function ThreadCard({
             alt={community.name}
             width={14}
             height={14}
-            className="ml-1 rounded-full object-contain"
+            className="ml-1 rounded-full object-cover"
           />
         </Link>
       )}
