@@ -59,7 +59,7 @@ export const POST = async (request: Request) => {
 
     try {
       // @ts-ignore
-      await createCommunity(id, name, slug, image_url, created_by);
+      await createCommunity(id, name, slug, image_url, "org bio", created_by);
 
       return NextResponse.json({ message: "Organization created" }, { status: 201 });
     } catch (err) {
@@ -145,11 +145,11 @@ export const POST = async (request: Request) => {
     try {
       // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/UpdateOrganization
       // Show what evnt?.data sends from above resource
-      const { id, logo_url, name, slug } = evnt?.data;
+      const { id, image_url, name, slug } = evnt?.data;
       console.log("updated", evnt?.data);
 
       // @ts-ignore
-      await updateCommunityInfo(id, name, slug, logo_url);
+      await updateCommunityInfo(id, name, slug, image_url_url);
 
       return NextResponse.json({ message: "Member removed" }, { status: 201 });
     } catch (err) {
