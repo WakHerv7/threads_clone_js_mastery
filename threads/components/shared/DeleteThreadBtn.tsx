@@ -9,6 +9,10 @@ export default function DeleteThreadBtn({id}: {id: string}) {
 
   // Call the server actions to delete thread when the delete button is clicked
   const handleDelete = async (id: string, pathname: string) => {
+    if (!id) {
+      return null;
+    }
+    
     await deleteThread(id, pathname);
   }
 

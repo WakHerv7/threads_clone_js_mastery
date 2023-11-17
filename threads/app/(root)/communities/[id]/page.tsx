@@ -24,6 +24,7 @@ async function Page({ params }: {params: {id: string}}) {
         username={communityDetails.username}
         imgUrl={communityDetails.image}
         bio={communityDetails.bio}
+        type="Community"
       />
 
       <div className="mt-9">
@@ -53,31 +54,34 @@ async function Page({ params }: {params: {id: string}}) {
           <TabsContent value="threads" className="w-full text-light-1">
             <ThreadsTab
               currentUserId={user.id}
-              accountId={communityDetails.id}
+              accountId={communityDetails?._id}
               accountType="Community"
-            /> 
+            />
           </TabsContent>
           <TabsContent value="members" className="w-full text-light-1">
-            {communityDetails.members.map((member: any) => {
-              <UserCard
-                id={member.id}
-                username={member.username}
-                name={member.name}
-                imgUrl={member.image}
-                personType="User"
-              />
-            })}
+            <section className="mt-9 flex flex-col gap-10">
+              {communityDetails?.members?.map((member: any) => (
+                <UserCard
+                  key={member.id}
+                  id={member.id}
+                  name={member.name}
+                  username={member.username}
+                  imgUrl={member.image}
+                  personType="User"
+                />
+              ))}
+            </section>
           </TabsContent>
-          <TabsContent value="requests" className="w-full text-light-1">
+          <TabsContent value="replies" className="w-full text-light-1">
             <ThreadsTab
               currentUserId={user.id}
-              accountId={communityDetails.id}
+              accountId={communityDetails?._id}
               accountType="Community"
-            /> 
+            />
           </TabsContent>
         </Tabs>
       </div>
-    </section>
+    </section>    
   )
 }
 
