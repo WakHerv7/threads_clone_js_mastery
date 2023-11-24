@@ -1,4 +1,5 @@
 import Image from "next/image";
+import EditButton from "./Edit";
 
 interface Props {
   accountId: string;
@@ -23,7 +24,7 @@ export default function ProfileHeader({
     <div className="flex w-full flex-col justify-start">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="relative h-20 w-20 object-cover">
+          <div className="flex justify-between relative h-20 w-20 object-cover">
             <Image
               src={imgUrl}
               alt="Profile Image"
@@ -40,6 +41,7 @@ export default function ProfileHeader({
             <p className="text-base-medium text-gray-1">@{username}</p>
           </div>
         </div>
+        <EditButton type="User" />
       </div>
 
         {/* TODO community implementation */}

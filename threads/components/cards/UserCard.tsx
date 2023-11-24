@@ -21,6 +21,11 @@ function UserCard({
 }: Props) {
   const router = useRouter();
 
+  // If personType is "Community" then button should lead to community page
+  const linkTo = personType === "Community" ?
+    `/communities/${id}` :
+    `/profile/${id}`;
+
   return (
     <article className="user-card">
       <div className="user-card_avatar">
@@ -40,7 +45,7 @@ function UserCard({
         <p className="text-small-medium text-gray-1">@{username}</p>
       </div>
 
-      <Button className="user-card_btn" onClick={() => router.push(`/profile/${id}`)}>
+      <Button className="user-card_btn" onClick={() => router.push(linkTo)}>
         View
       </Button>
     </article>
