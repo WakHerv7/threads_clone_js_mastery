@@ -14,8 +14,7 @@ import * as z from 'zod';
 import { Input } from "../ui/input";
 import { CommunityValidation } from "../../lib/validations/community";
 import Image from "next/image";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const SearchBar = ({ placeholder }: { placeholder: string }) => {
   const searchParams = useSearchParams();
@@ -69,7 +68,7 @@ const SearchBar = ({ placeholder }: { placeholder: string }) => {
               <Input
                 type="text"
                 placeholder={placeholder}
-                className="searchbar-input"
+                className="searchbar-input text-light-1"
                 {...field}
               />
             </FormControl>

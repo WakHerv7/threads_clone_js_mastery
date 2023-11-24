@@ -3,7 +3,7 @@ import SearchBar from "@/components/forms/SearchBar";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import { currentUser } from "@clerk/nextjs";
 
-export default async function Page({ searchParams }: { searchParams: { q: string } }) {
+export default async function CommunitiesPage({ searchParams }: { searchParams: { q: string } }) {
   const q = searchParams?.q || "";
 
   const user = await currentUser();
